@@ -1,3 +1,4 @@
+#!\bin\bash
 data=$(LC_NUMERIC=en_US.UTF-8 awk -F';' 'NR > 2 {count[$6]+=$5} END {for (i in count) printf "%.3f %s\n", count[i], i}' data.csv | sort -k1,1nr | head -10)
 
 echo "$data" > temp_data.txt
