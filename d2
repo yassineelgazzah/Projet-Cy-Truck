@@ -1,0 +1,18 @@
+#!\bin\bash
+data=$(LC_NUMERIC=en_US.UTF-8 awk -F';' 'NR > 2 {count[$6]+=$5} END {for (i in count) printf "%.3f %s\n", count[i], i}' data.csv | sort -k1,1nr | head -10)
+
+echo "$data" > temp_data.txt
+
+gnuplot <<- EOF
+    	set terminal pngcairo enhanced font "arial,10" size 800,600
+    	set output 'histogramme.png'
+    	set style fill solid
+    	set boxwidth 0.5
+    	set yrange [*:*] 
+    	set xlabel "Distance totale parcourue"
+    	set ylabel "Conducteurs"
+    	set title "Histogramme des distances parcourues par conducteur"
+    	plot 'temp_data.txt' using 1:xticlabels(2) with boxes notitle
+EOF
+convert -rotate 90 histogramme.png histogramme.png
+rm temp_data.txt
