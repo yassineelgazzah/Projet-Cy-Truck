@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Record the start time
 start_time=$(date +%s)
 
 awk -F';' '{conducteurs[$1]++; if (!distance[$1]) { count[$6]++; distance[$1]=1 }} 
