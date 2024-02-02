@@ -1,7 +1,7 @@
 all: d1 d2 l t s
 
 d1:
-  bash d1.sh
+	bash d1.sh
 
 d2:
 	bash d2.sh
@@ -9,14 +9,13 @@ d2:
 l:
 	bash l.sh
 
-t: tr-t.c
+t: 
 	gcc -o tr-t tr-t.c
 	bash t.sh
 
-s: trai-s.c
+s: 
 	gcc -o trai-s trai-s.c
 	bash s.sh
 
 clean:
 	rm -f tr-t trai-s
-
